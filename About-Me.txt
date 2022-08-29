@@ -1,0 +1,4 @@
+Hi, my name is James.  I am a student in the IT program at the Missoula College with a 
+focus in Network Administration, and I code as a hobby.  I am well versed in both
+Python and Java so far, and look forward to getting my feet wet with more
+creative applications for programming with new languages I have yet to experience!
