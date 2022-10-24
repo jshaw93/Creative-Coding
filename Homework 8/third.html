@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Contact us</title>
+    </head>
+    <body>
+        <main>
+            <h1>Contact us</h1>
+            <table>
+                <tr><th>Navigate</th></tr>
+                <tr>
+                    <th>Page</th>
+                    <th>Link</th>
+                </tr>
+                <tr>
+                    <td>Homepage</td>
+                    <td><a href="homepage.html">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Story</td>
+                    <td><a href="second.html">Link</a></td>
+                </tr>
+            </table>
+            <form onsubmit="return validate();">
+                <label for="fname">First name:</label><br>
+                <input type="text" id="fname" name="fname"><br>
+                <label for="lname">Last name:</label><br>
+                <input type="text" id="lname" name="lname"><br>
+                <label for="toa" id="toalab">Terms of agreement: </label>
+                <input type="checkbox" id="toa" name="toa"><br>
+                <input type="submit" value="submit">
+            </form>
+            <script>
+                function validate() {
+                    var fname = document.getElementById("fname").value;
+                    var lname = document.getElementById("lname").value;
+                    var check = document.getElementById("toa").checked;
+                    if(fname.length <= 0) {
+                        var elem = document.getElementById("fname");
+                        elem.setAttribute("style", "border:2px solid red");
+                        elem.focus;
+                        alert("Missing first name!");
+                        return false;
+                    } else if(lname.length <= 0) {
+                        var elem = document.getElementById("lname");
+                        elem.setAttribute("style", "border:2px solid red");
+                        elem.focus;
+                        alert("Missing last name!");
+                        return false;
+                    } else if(!check) {
+                        var elem = document.getElementById("toalab");
+                        elem.setAttribute("style", "color:red");
+                        elem.focus;
+                        alert("Agreement to the Terms of Agreement is required!");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+        </main>
+    </body>
+</html>
