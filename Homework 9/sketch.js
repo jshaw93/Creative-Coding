@@ -28,6 +28,7 @@ function draw() {
     fill(35, 55, 255);
     circle(182, 171, 10);
     circle(222, 171, 10);
+    fill(0, 0, 0);
     point(182, 170);
     point(222, 170);
 
