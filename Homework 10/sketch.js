@@ -5,13 +5,16 @@ function setup() {
 var leftEye = [182, 171];
 var rightEye = [222, 171];
 var leftTranslate = false;
+var eyeSpeed = Math.floor(Math.random() * 10) + 1;
 
 var leftBrow = [170, 150, 185, 145, 185, 145, 195, 150];
 var rightBrow = [205, 150, 215, 145, 215, 145, 230, 150];
 var browTranslate = false;
+var browSpeed = Math.floor(Math.random() * 10) + 1;
 
 var beard = [175, 210, 200, 250, 225, 210];
 var beardTranslate = false;
+var beardSpeed = Math.floor(Math.random() * 10) + 1;
 
 var titleSize = 22;
 var titleTranslate = false;
@@ -76,11 +79,11 @@ function translateEyes(left, right) {
         leftTranslate = false;
     }
     if(leftTranslate) {
-        leftEye[0] -= 1;
-        rightEye[0] -= 1;
+        leftEye[0] -= eyeSpeed;
+        rightEye[0] -= eyeSpeed;
     } else {
-        leftEye[0] += 1;
-        rightEye[0] += 1;
+        leftEye[0] += eyeSpeed;
+        rightEye[0] += eyeSpeed;
     }
 }
 
@@ -91,23 +94,23 @@ function translateEyebrows(left, right) {
         browTranslate = false;
     }
     if(browTranslate) {
-        leftBrow[1] -= 1;
-        leftBrow[3] -= 1;
-        leftBrow[5] -= 1;
-        leftBrow[7] -= 1;
-        rightBrow[1] -= 1;
-        rightBrow[3] -= 1;
-        rightBrow[5] -= 1;
-        rightBrow[7] -= 1;
+        leftBrow[1] -= browSpeed;
+        leftBrow[3] -= browSpeed;
+        leftBrow[5] -= browSpeed;
+        leftBrow[7] -= browSpeed;
+        rightBrow[1] -= browSpeed;
+        rightBrow[3] -= browSpeed;
+        rightBrow[5] -= browSpeed;
+        rightBrow[7] -= browSpeed;
     } else {
-        leftBrow[1] += 1;
-        leftBrow[3] += 1;
-        leftBrow[5] += 1;
-        leftBrow[7] += 1;
-        rightBrow[1] += 1;
-        rightBrow[3] += 1;
-        rightBrow[5] += 1;
-        rightBrow[7] += 1;
+        leftBrow[1] += browSpeed;
+        leftBrow[3] += browSpeed;
+        leftBrow[5] += browSpeed;
+        leftBrow[7] += browSpeed;
+        rightBrow[1] += browSpeed;
+        rightBrow[3] += browSpeed;
+        rightBrow[5] += browSpeed;
+        rightBrow[7] += browSpeed;
     }
 }
 
@@ -120,11 +123,11 @@ function translateBeard(beardVar) {
     }
     if(beardTranslate) {
         for(let index = 0; index < beardVar.length; index++) {
-            beard[index] -= 1;
+            beard[index] -= beardSpeed;
         }
     } else {
         for(let index = 0; index < beardVar.length; index++) {
-            beard[index] += 1;
+            beard[index] += beardSpeed;
         }
     }
 }
