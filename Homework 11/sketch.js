@@ -22,7 +22,7 @@ function draw() {
             for(let enemy in enemies) {
                 if(i == enemies[enemy][0] && j == enemies[enemy][1]) {
                     fill(255, 0, 0);
-                    circle(i * 30 + 15, j * 30 + 15, 30, 30);
+                    circle(i * 30 + 15, j * 30 + 15, 30);
                 }
                 if(tickCount > 5000) {
                     var rand1 = Math.floor(Math.random() * 4);
