@@ -25,26 +25,26 @@ function draw() {
                     circle(i * 30 + 15, j * 30 + 15, 30, 30);
                 }
                 if(tickCount > 5000) {
-                    var rand1 = Math.floor(Math.random() * 10) % 4;
+                    var rand1 = Math.floor(Math.random() * 4);
                     switch(rand1) {
                         case 0:
-                            enemies[enemy][1] += 1;
-                            if(enemies[enemy][[1]] >= 19) {
+                            enemies[enemy][1] -= 1;
+                            if(enemies[enemy][[1]] > 19) {
                                 enemies[enemy][1] = 0;
                             }
                         case 1:
                             enemies[enemy][0] += 1;
-                            if(enemies[enemy][[0]] >= 19) {
+                            if(enemies[enemy][[0]] > 19) {
                                 enemies[enemy][0] = 0;
                             }
                         case 2:
-                            enemies[enemy][1] -= 1;
-                            if(enemies[enemy][[1]] <= 0) {
+                            enemies[enemy][1] += 1;
+                            if(enemies[enemy][[1]] < 0) {
                                 enemies[enemy][1] = 19;
                             }
                         case 3:
                             enemies[enemy][0] -= 1;
-                            if(enemies[enemy][[0]] <= 0) {
+                            if(enemies[enemy][[0]] < 0) {
                                 enemies[enemy][0] = 19;
                             }
                     }
