@@ -8,6 +8,17 @@ function setup() {
 var enemies = [];
 var obstacles = [];
 var tickCount = 0;
+var tickCount1 = 0;
+var player = [0, 0];
+var playerTick = 0;
+var lives = 5;
+
+var w = 87; 
+var s = 83;
+var a = 65;
+var d = 68;
+
+var winBool = false;
 
 function draw() {
     background(220);
@@ -19,18 +30,68 @@ function draw() {
                 fill(255, 255, 255);
             }
             rect(i * 30, j * 30, 30, 30);
+            fill(25, 21, 255);
+            triangle(player[0] * 30, player[1] * 30 + 30, player[0] * 30 + 30, player[1] * 30 + 30, player[0] * 30 + 15, player[1] * 30);
+            fill(255, 255, 255);
+            for(let obstacle in obstacles) {
+                fill(0, 0, 0);
+                rect(obstacles[obstacle][0] * 30, obstacles[obstacle][1] * 30, 30, 30);
+            }
+            if(playerTick > 4000) {
+                if(keyIsDown(w) && player[1] != 0) {
+                    var copy = Object.assign([], player);
+                    copy[1] -= 1;
+                    if(!checkObstacle(obstacles, copy)) {
+                        player[1] -= 1;
+                    }
+                } else if(keyIsDown(s) && player[1] != 19) {
+                    var copy = Object.assign([], player);
+                    copy[1] += 1;
+                    if(!checkObstacle(obstacles, copy)) {
+                        player[1] += 1;
+                    }
+                } else if(keyIsDown(a) && player[0] != 0) {
+                    var copy = Object.assign([], player);
+                    copy[0] -= 1;
+                    if(!checkObstacle(obstacles, copy)) {
+                        player[0] -= 1;
+                    }
+                } else if(keyIsDown(d) && player[0] != 19) {
+                    var copy = Object.assign([], player);
+                    copy[0] += 1;
+                    if(!checkObstacle(obstacles, copy)) {
+                        player[0] += 1;
+                    }
+                }
+                if(player[0] == 19 && player[1] == 10 && lives > 0 && !winBool) {
+                    alert("You win!");
+                    winBool = true;
+                }
+            }
             for(let enemy in enemies) {
                 if(i == enemies[enemy][0] && j == enemies[enemy][1]) {
-                    fill(255, 0, 0);
-                    circle(i * 30 + 15, j * 30 + 15, 30);
+                    if(enemy % 2 == 0) {
+                        fill(255, 0, 0);
+                        rect(i * 30 + 2.5, j * 30 + 2.5, 25, 25);
+                    } else {
+                        fill(255, 150, 0);
+                        circle(i * 30 + 15, j * 30 + 15, 30);
+                    }
                 }
-                if(tickCount > 5000) {
+                if(tickCount > 5000 && enemy % 2 == 0) {
+                    if(enemies[enemy][0] == player[0] && enemies[enemy][1] == player[1]) {
+                        player = [0, 0];
+                        lives -= 1;
+                        if(lives == 0) {
+                            alert("You lose!");
+                        }
+                    }
                     var rand1 = Math.floor(Math.random() * 4);
                     switch(rand1) {
                         case 0:
                             enemies[enemy][1] -= 1;
-                            if(enemies[enemy][[1]] > 19) {
-                                enemies[enemy][1] = 0;
+                            if(enemies[enemy][[1]] < 0) {
+                                enemies[enemy][1] = 19;
                             }
                         case 1:
                             enemies[enemy][0] += 1;
@@ -39,8 +100,35 @@ function draw() {
                             }
                         case 2:
                             enemies[enemy][1] += 1;
+                            if(enemies[enemy][[1]] > 19) {
+                                enemies[enemy][1] = 0;
+                            }
+                        case 3:
+                            enemies[enemy][0] -= 1;
+                            if(enemies[enemy][[0]] < 0) {
+                                enemies[enemy][0] = 19;
+                            }
+                    }
+                } else if(tickCount1 > 3200 && enemy % 2 != 0) {
+                    if(enemies[enemy][0] == player[0] && enemies[enemy][1] == player[1]) {
+                        player = [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)];
+                    }
+                    var rand1 = Math.floor(Math.random() * 4);
+                    switch(rand1) {
+                        case 0:
+                            enemies[enemy][1] -= 1;
                             if(enemies[enemy][[1]] < 0) {
                                 enemies[enemy][1] = 19;
+                            }
+                        case 1:
+                            enemies[enemy][0] += 1;
+                            if(enemies[enemy][[0]] > 19) {
+                                enemies[enemy][0] = 0;
+                            }
+                        case 2:
+                            enemies[enemy][1] += 1;
+                            if(enemies[enemy][[1]] > 19) {
+                                enemies[enemy][1] = 0;
                             }
                         case 3:
                             enemies[enemy][0] -= 1;
@@ -56,6 +144,32 @@ function draw() {
             } else {
                 tickCount++;
             }
+            if(tickCount1 > 3200) {
+                tickCount1 = 0;
+            } else {
+                tickCount1++;
+            }
+            if(playerTick > 4000) {
+                playerTick = 0;
+            } else {
+                playerTick++;
+            }
         }
     }
+}
+
+function mouseClicked() {
+    if(!(Math.floor(mouseX / 30) == 19 && Math.floor(mouseY / 30) == 10)) {
+        obstacles.push([Math.floor(mouseX / 30), Math.floor(mouseY / 30)]);
+    }
+}
+
+function checkObstacle(obstacleArr, obstacle) {
+    var a = JSON.stringify(obstacleArr);
+    var b = JSON.stringify(obstacle);
+    var c = a.indexOf(b);
+    if(c != -1) {
+        return true;
+    }
+    return false;
 }
