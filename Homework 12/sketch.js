@@ -195,7 +195,7 @@ function tick() {
         playerTick = 0;
     } else {
         playerTick++;
-    }a
+    }
 }
 
 function doWin(playerWin) {
