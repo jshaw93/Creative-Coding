@@ -36,7 +36,7 @@ function draw() {
             if(playerTick > 4000) {
                 movePlayer();
             }
-            moveEnemies();
+            moveEnemies(i, j);
             fill(255, 255, 255);
             tick();
         }
@@ -107,15 +107,15 @@ function movePlayer() {
     }
 }
 
-function moveEnemies() {
+function moveEnemies(x, y) {
     for(let enemy in enemies) {
-        if(i == enemies[enemy][0] && j == enemies[enemy][1]) {
+        if(x == enemies[enemy][0] && y == enemies[enemy][1]) {
             if(enemy % 2 == 0) {
                 fill(255, 0, 0);
-                rect(i * 30 + 2.5, j * 30 + 2.5, 25, 25);
+                rect(x * 30 + 2.5, y * 30 + 2.5, 25, 25);
             } else {
                 fill(255, 150, 0);
-                circle(i * 30 + 15, j * 30 + 15, 30);
+                circle(x * 30 + 15, y * 30 + 15, 30);
             }
         }
         if(tickCount > 5000 && enemy % 2 == 0) {
